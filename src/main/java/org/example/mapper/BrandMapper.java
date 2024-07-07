@@ -20,4 +20,8 @@ public interface BrandMapper {
     void add(Brand brand);
 
     int update(Brand brand);
+
+    void deleteById(int id);
+
+    void deleteByIds(@Param("ids")int[] ids);
 }

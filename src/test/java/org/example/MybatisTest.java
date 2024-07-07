@@ -169,4 +169,46 @@ public class MybatisTest {
         sqlSession.close();
         System.out.println(count);
     }
+
+    @Test
+    public void testDeleteById() throws IOException {
+        //1. 加载mybatis的核心配置文件，获取SqlSessionFactory
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //2. 获取SqlSession对象
+        // SqlSession sqlSession = sqlSessionFactory.openSession();
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+        //3. 执行sql
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        int id = 6;
+        brandMapper.deleteById(id);
+        //提交事务
+        //sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Test
+    public void testDeleteByIds() throws IOException {
+        //1. 加载mybatis的核心配置文件，获取SqlSessionFactory
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //2. 获取SqlSession对象
+        // SqlSession sqlSession = sqlSessionFactory.openSession();
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+        //3. 执行sql
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        int[] ids = {5, 7};
+        brandMapper.deleteByIds(ids);
+        //提交事务
+        //sqlSession.commit();
+        sqlSession.close();
+    }
 }
