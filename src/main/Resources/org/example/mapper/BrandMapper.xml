@@ -20,12 +20,41 @@
         ]]>
         #{id};
     </select>
-    
+    <!-- 动态查询 -->
     <select id="selectByCondition" resultMap="brandResultMap">
         select *
         from tb_brand
-        where status = #{status}
-            and company_name like #{companyName}
-            and brand_name like #{brandName}
+        <where>
+            <if test="status != null">
+                status = #{status}
+            </if>
+            <if test="companyName != null and companyName != ''">
+                and company_name like #{companyName}
+            </if>
+            <if test="brandName != null and brandName != ''">
+                and brand_name like #{brandName}
+            </if>
+        </where>
+    </select>
+    <!-- 动态单条件查询 -->
+    <select id="selectByConditionSingle" resultMap="brandResultMap">
+        select *
+        from tb_brand
+        <where>
+            <choose>
+                <when test="status != null">
+                    status = #{status}
+                </when>
+                <when test="companyName != null and companyName != ''">
+                    company_name like #{companyName}
+                </when>
+                <when test="brandName != null and brandName != ''">
+                    brand_name like #{brandName}
+                </when>
+<!--                <otherwise>-->
+<!--                    1 = 1-->
+<!--                </otherwise>-->
+            </choose>
+        </where>
     </select>
 </mapper>
