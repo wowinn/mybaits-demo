@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <typeAliases>
+    <typeAlias type="org.example.pojo.Brand" alias="Brand"/>
+  </typeAliases>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <!--数据库连接信息-->
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql:///mybatis?useSSL=false"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <!--加载sql映射文件  -->
+    <!--<mapper resource="org.example.mapper.UserMapper" />-->
+    <!--Mapper代理方式 -->
+    <package name="org.example.mapper"/>
+  </mappers>
+</configuration>
